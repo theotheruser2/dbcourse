@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block app_content %}
+    <h1>Mage Info:</h1>
+<img src="/static/mages/{{mage_info.name}}.jpg" alt="No image available." height="200" width="200"/>
+    <p>
+        Name: {{mage_info.name}}<br>
+        Mask: {{mage_info.mask}}<br>
+        Alive: {{mage_info.alive}}<br>
+        Power Level: {{mage_info.power_lvl}}<br>
+        Wealth: {{mage_info.money}}<br>
+        <a href="{{url_for('locale', locale_id=mage_info.locale_id)}}" class="btn btn-primary stretched-link">Current location</a>
+        {% if mage_info.org_id != None %}
+        <a href="{{url_for('org', org_id=mage_info.org_id)}}" class="btn btn-primary stretched-link">Organization</a>
+        {% endif %}
+    </p>
+{%if trade_info %}
+    <h3>Previous deals:</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Trade ID</th>
+                <th>Buyer Name</th>
+                <th>Seller Name</th>
+                <th>Smoke Ability</th>
+                <th>Drug Name</th>
+            <tr>
+        </thead>
+        <tbody>
+            {% for trade in trade_info %}
+            <tr>
+                <td>{{ trade.tradeid }}</td>
+                <td>{{ trade.buyer_name }}</td>
+                <td><a href="{{url_for('mage', mage_id=trade.seller_id)}}" class="btn btn-primary stretched-link">{{ trade.seller_name }}</a></td>
+                <td>{{ trade.smoke_ab }}</td>
+                <td>{{ trade.drug_name }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{%endif%}
+{% endblock %}

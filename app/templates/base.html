@@ -1,0 +1,37 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block title %}
+    Mage Network
+{% endblock %}
+
+{% block navbar %}
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{{ url_for('mages') }}">HOME</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="{{ url_for('train', exec_id = 0) }}">Training Schedule</a></li>
+                <li><a href="{{ url_for('test') }}">Test Results</a></li>
+                <li><a href="{{ url_for('hospital') }}">Hospital</a></li>
+                <li><a href="{{ url_for('trade') }}">Mage Marketplace</a></li>
+                <li><a href="{{ url_for('travel') }}">Travel Agency</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-info">{{message}}</div>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+    {% block app_content %}{% endblock %}
+</div>
+{% endblock %}

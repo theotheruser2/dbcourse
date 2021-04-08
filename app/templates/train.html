@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block app_content %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% if exec_id == '0'  or exec_id == None %}
+<p hidden = "true">{{exec_id}}</p>
+{% else %}
+    <div class="alert alert-info" role="alert">
+        {{ trfunc(exec_id) }}
+    </div>
+{% endif %}
+
+<h1>Available Trainings</h1>
+
+<hr>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Leading Mage</th>
+            <th>Sidekick</th>
+            <th>Victim</th>
+            <th>Result</th>
+        <tr>
+    </thead>
+    <tbody>
+        {% for train in trainings %}
+        <tr>
+            <td>{{ train.train_id }}</td>
+            <td><a href="{{url_for('mage', mage_id=train.lm_id)}}" class="btn btn-primary stretched-link">{{ train.lead_mage }}</a></td>
+            {% if train.sidekick != None %}
+                <td><a href="{{url_for('mage', mage_id=train.sk_id)}}" class="btn btn-primary stretched-link">{{ train.sidekick }}</a></td>
+            {% else %}
+                <td>None</td>
+            {% endif %}
+            {% if train.victim != None %}
+                <td><a href="{{url_for('human', human_id=train.v_id)}}" class="btn btn-primary stretched-link">{{ train.victim }}</a></td>
+            {% else %}
+                <td>None</td>
+            {% endif %}
+            <td>{{ train.res }}</td>
+            <td><a href="{{ url_for('train', exec_id=train.train_id)}}"><span class="badge badge-warning">Execute</span></a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="row">
+    <div class="row-md-4">
+        <h3>New training:</h3>
+        {{ wtf.quick_form(form, form_type = "horizontal", horizontal_columns=('md', 4, 4)) }}
+    </div>
+</div><br>
+
+{% endblock %}

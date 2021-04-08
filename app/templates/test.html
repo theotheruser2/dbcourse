@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block app_content %}
+<h1>Tests</h1>
+
+<hr>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Mage</th>
+            <th>Resulting Devil</th>
+            <th>Result</th>
+        <tr>
+    </thead>
+    <tbody>
+        {% for test in tests %}
+        <tr>
+            <td><a href="{{url_for('mage', mage_id=test.mage_id)}}" class="btn btn-primary stretched-link">{{ test.mage_name}}</a></td>
+            {% if test.devil_id != None %}
+                <td><a href="{{url_for('devil', devil_id=test.devil_id)}}" class="btn btn-primary stretched-link">{{test.new_devil}}</a></td>
+            {% else %}
+                <td>No devil, as the test was failed.</td>
+            {% endif %}
+            {% if test.res  %}
+                <td>{{test.result}}Successfully passed the test.</td>
+            {% else %}
+                <td>Did not pass and died in the process.</td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

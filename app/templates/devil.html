@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block app_content %}
+    <h1>Devil Info:</h1>
+<img src="/static/devils/{{devil_info.name}}.jpg" alt="No image available." height="200" width="200"/>
+    <p>
+        Name: {{devil_info.name}}<br>
+        <a href="{{url_for('locale', locale_id=devil_info.locale_id)}}" class="btn btn-primary stretched-link">Current location</a>
+        {% if devil_info.prev_mage != None %}
+        <a href="{{url_for('mage', mage_id=devil_info.prev_mage)}}" class="btn btn-primary stretched-link">Previous Mage</a>
+        {% endif %}
+    </p>
+{% endblock %}

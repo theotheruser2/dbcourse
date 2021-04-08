@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block app_content %}
+    <h1>Human Info:</h1>
+<img src="/static/humans/{{human_info.name}}.jpg"  alt="No image available." height="200" width="200"/>
+    <p>
+        Name: {{human_info.name}}<br>
+        Effect: {{human_info.effect}}<br>
+        Alive: {{human_info.alive}}<br>
+        <a href="{{url_for('locale', locale_id=human_info.locale_id)}}" class="btn btn-primary stretched-link">Current location</a>
+    </p>
+{% endblock %}

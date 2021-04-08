@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block app_content %}
+    <h1>Organization Info:</h1>
+    <p>
+        Name: {{org_info.name}}<br>
+        Info: {{org_info.description}}<br>
+        <a href="{{url_for('mage', mage_id=org_info.head_id)}}" class="btn btn-primary stretched-link">Head of the organization.</a>
+    </p>
+{% endblock %}
